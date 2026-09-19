@@ -28,8 +28,11 @@ export async function sendMessage(channel, content) {
         body: JSON.stringify(payload)
     });
 
-    console.log(response.status);
-    console.log(await response.text());
+    if (!response.ok) {
+        const body = await response.text();
+        throw new Error(`Failed to send message: ${response.status} ${response.statusText} - ${body}`);
+    }
+    return response.json();
 }
 
 export async function sendMessageWithAttachment(channel, content, attachmentUrl) {
@@ -58,8 +61,11 @@ export async function sendMessageWithAttachment(channel, content, attachmentUrl)
         body: form
     });
 
-    console.log(response.status);
-    console.log(await response.text());
+    if (!response.ok) {
+        const body = await response.text();
+        throw new Error(`Failed to send message: ${response.status} ${response.statusText} - ${body}`);
+    }
+    return response.json();
 }
 
 export function buildContent(message, user, roles) {
