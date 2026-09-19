@@ -1,43 +1,4 @@
-import { createContext, useContext, useState } from 'react'
-
-const servers = [
-    {
-        id: "1",
-        name: "SSBU Ireland",
-        channels: [
-            { id: "101", name: "announcements" },
-            { id: "102", name: "tournaments" },
-        ],
-        roles: [
-            { id: "901", name: "TO" },
-            { id: "902", name: "Head TO" },
-        ],
-    },
-    {
-        id: "2",
-        name: "SSBU Melee",
-        channels: [
-            { id: "101", name: "announcements" },
-            { id: "102", name: "tournaments" },
-        ],
-        roles: [
-            { id: "901", name: "melee is actually a better game" },
-            { id: "902", name: "LMOA ult also i smell really bad" },
-        ],
-    },
-    {
-        id: "3",
-        name: "The North Awakens",
-        channels: [
-            { id: "101", name: "announcements" },
-            { id: "102", name: "tournaments" },
-        ],
-        roles: [
-            { id: "901", name: "Big Fish" },
-            { id: "902", name: "Big Fish TO" },
-        ],
-    },
-];
+import { createContext, useContext, useEffect, useState } from 'react'
 
 const MAX_MESSAGE_LENGTH = 1900; //discords is 2000 but this is to allow roles
 
@@ -53,8 +14,16 @@ function buildContent(message, roleIds) {
 */
 
 export function AnnouncerProvider({ children }) {
+    const [servers, setServers] = useState([]);
     const [selections, setSelections] = useState({});
     const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        fetch('/api/config')
+            .then((res) => res.json())
+            .then(setServers)
+            .catch((err) => console.error('Failed to load config', err));
+    }, []);
 
     function toggleServer(serverId) {
         setSelections((prev) => {

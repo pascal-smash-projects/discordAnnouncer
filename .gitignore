@@ -1,0 +1,7 @@
+bot/test1.mjs
+.env
+**/.env
+node_modules/
+**/node_modules/
+dist/
+**/dist/

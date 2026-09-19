@@ -1,0 +1,45 @@
+{
+  "servers": {
+    "ssbu ireland": {
+      "serverId": "ult",
+      "channels": {
+        "ssbu-ireland-announcements": "1550850902884360373",
+        "ssbu-ireland-ulster-events": "1550850967707189389",
+        "ssbu-ireland-munster-events": "1550851011441205278",
+        "ssbu-ireland-connacht-events": "1550851045914058842",
+        "ssbu-ireland-leinster-events": "1550851142827642993",
+        "ssbu-ireland-online-events": "1550851963854258276",
+        "ssbu-tourney-streams": "1550851997232533964",
+        "ssbu-ireland-rankings-results": "1550852033865584740"
+      },
+      "roles": {
+        "melt1": "1550871175071142058",
+        "melt102": "1550871286325059584"
+      }
+    },
+    "ssbm ireland": {
+      "serverId": "melee",
+      "channels": {
+        "ssbm-ireland-irish-tourneys": "1550852764614140045"
+      },
+      "roles": {
+        "melt1": "1550871175071142058",
+        "melt102": "1550871286325059584"
+      }
+    },
+    "tna": {
+      "serverId": "tna",
+      "channels": {
+        "tna-announcements": "1550852864933629983",
+        "tna-monthly-schedule": "1550852889138700431",
+        "tna-upcoming-tournaments": "1550852919497064518",
+        "tna-tournament-streams": "1550852943996264458",
+        "tna-results": "1550852964216995921"
+      },
+      "roles": {
+        "melt1": "1550871175071142058",
+        "melt102": "1550871286325059584"
+      }
+    }
+  }
+}

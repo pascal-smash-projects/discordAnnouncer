@@ -4,9 +4,18 @@ export default function SubmitButton() {
     const { targets, isReadyToSend } = useAnnouncer();
 
     function handleSubmit() {
-        const payload = { targets };
+        const payload = targets.map((target) => ({
+            channel: target.channelId,
+            roles: target.roleIds,
+            message: target.message,
+            user: '',
+        }));
 
-        console.log(JSON.stringify(payload, null, 2));
+        const response = fetch('/api/announce', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
     }
 
     return (
