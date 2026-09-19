@@ -14,16 +14,70 @@ function buildContent(message, roleIds) {
 */
 
 export function AnnouncerProvider({ children }) {
+    const [configError, setConfigError] = useState('');
+    const [submitStatus, setSubmitStatus] = useState('idle'); // idle | sending | done | partial | error
+    const [submitError, setSubmitError] = useState('');
+    const [results, setResults] = useState([]);
     const [servers, setServers] = useState([]);
     const [selections, setSelections] = useState({});
     const [message, setMessage] = useState('');
 
     useEffect(() => {
         fetch('/api/config')
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+                return res.json();
+            })
             .then(setServers)
-            .catch((err) => console.error('Failed to load config', err));
+            .catch((err) => {
+                console.error('Failed to load config', err);
+                setConfigError('Could not load servers. Is the backend running?');
+            });
     }, []);
+
+    async function submit() {
+        setSubmitStatus('sending');
+        setResults([]);
+        setSubmitError('');
+
+        const payload = targets.map((target) => ({
+            server: target.serverId,
+            channel: target.channelId,
+            roles: target.roleIds,
+            message: target.message,
+            user: '',
+        }));
+
+        try {
+            const res = await fetch('/api/announce', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            let data = null;
+            try { data = await res.json(); } catch { /* non-JSON body */ }
+
+            if (data?.results) {
+                setResults(data.results);
+                setSubmitStatus(data.failed === 0 ? 'done' : data.sent === 0 ? 'error' : 'partial');
+                return;
+            }
+
+            setSubmitError(data?.error || `Request failed (${res.status})`);
+            setSubmitStatus('error');
+        } catch (err) {
+            console.error(err);
+            setSubmitError('Could not reach the server. Is it running?');
+            setSubmitStatus('error');
+        }
+    }
+
+    function dismissResult() {
+        setSubmitStatus('idle');
+        setResults([]);
+        setSubmitError('');
+    }
 
     function toggleServer(serverId) {
         setSelections((prev) => {
@@ -82,6 +136,12 @@ export function AnnouncerProvider({ children }) {
         toggleServer,
         setChannel,
         toggleRole,
+        configError,
+        submitStatus,
+        results,
+        submitError,
+        submit,
+        dismissResult,
     };
 
     return (

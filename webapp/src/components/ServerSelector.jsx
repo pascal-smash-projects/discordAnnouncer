@@ -1,7 +1,11 @@
 import { useAnnouncer } from '../context/AnnouncerContext'
 
 export default function ServerSelector() {
-    const { servers, selections, toggleServer, setChannel, toggleRole } = useAnnouncer();
+    const { servers, selections, configError, toggleServer, setChannel, toggleRole } = useAnnouncer();
+    
+    if (configError) {
+        return <div className="feedback error" role="alert">{configError}</div>;
+    }
 
     return (
         <div>
