@@ -1,0 +1,88 @@
+.server-selector {
+  margin-bottom: 24px;
+}
+
+.server-section-title {
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Label on the left, control on the right. The whole row is clickable. */
+.server-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.server-row-name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.server-checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  accent-color: #5865f2;
+  cursor: pointer;
+}
+
+/* Channel and role options for a ticked server, indented under it */
+.server-details {
+  margin: 0 0 8px 12px;
+  padding-left: 16px;
+  border-left: 2px solid #3f4147;
+}
+
+.server-details .server-row {
+  padding: 8px 0;
+}
+
+.server-details .server-row-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #dbdee1;
+}
+
+/* Dropdown styled like the "All Messages" one in Discord */
+.server-select {
+  min-width: 180px;
+  max-width: 60%;
+  padding: 8px 36px 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: #f2f3f5;
+  background-color: #1e1f22;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23f2f3f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid #3f4147;
+  border-radius: 4px;
+  appearance: none;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.server-select:focus {
+  outline: none;
+  border-color: #5865f2;
+}
+
+/* Roles group */
+.server-roles {
+  min-inline-size: 0;
+  border: 0;
+}
+
+.server-roles legend {
+  padding: 8px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #b5bac1;
+}

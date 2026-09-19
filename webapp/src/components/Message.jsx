@@ -1,4 +1,5 @@
 import { useAnnouncer } from '../context/AnnouncerContext'
+import './Message.css';
 
 export default function Message() {
     const { servers,
@@ -12,8 +13,8 @@ export default function Message() {
     const remaining = MAX_MESSAGE_LENGTH - message.trim().length;
 
     return (
-        <div>
-            <label htmlFor="message">Message</label>
+        <div className="message">
+            <label className='message-label' htmlFor="message">Message</label>
 
             <textarea
                 id="message"
@@ -23,7 +24,7 @@ export default function Message() {
                 placeholder="Write your announcement..."
             />
 
-            <small style={{ color: isMessageTooLong ? 'red' : 'inherit' }}>
+            <small className={isMessageTooLong ? 'message-counter over' : 'message-counter'}>
                 {remaining} characters remaining
             </small>
 
@@ -34,10 +35,9 @@ export default function Message() {
                     .join(' ');
 
                 return (
-                    <div key={target.serverId}>
+                    <div className='message-preview' key={target.serverId}>
                         <strong>{server.name}</strong>
                         {pings && <div>{pings}</div>}
-                        <div>{message.trim()}</div>
                     </div>
                 );
             })}
