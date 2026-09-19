@@ -15,16 +15,17 @@
 
 .message-input {
   width: 100%;
-  min-height: 140px;
+  min-height: 96px;
   max-height: 320px;
   padding: 10px 12px;
   font: inherit;
   line-height: 1.4;
   color: #f2f3f5;
   background: #1e1f22;
-  border: 1px solid transparent;
+  border: 1px solid #3f4147;
   border-radius: 4px;
-  resize: vertical;
+  resize: none;
+  overflow-y: auto;
 }
 
 .message-input::placeholder {

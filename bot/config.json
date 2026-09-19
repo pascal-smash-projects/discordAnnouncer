@@ -1,6 +1,6 @@
 {
   "servers": {
-    "ssbu ireland": {
+    "Smash Ireland (SSBU)": {
       "serverId": "ult",
       "channels": {
         "ssbu-ireland-announcements": "1550850902884360373",
@@ -18,7 +18,7 @@
         "melt102": "1550871286325059584"
       }
     },
-    "ssbm ireland": {
+    "SSBM Ireland": {
       "serverId": "melee",
       "channels": {
         "ssbm-ireland-irish-tourneys": "1550852764614140045"
@@ -29,7 +29,7 @@
         "melt102": "1550871286325059584"
       }
     },
-    "tna": {
+    "The North Awakens": {
       "serverId": "tna",
       "channels": {
         "tna-announcements": "1550852864933629983",

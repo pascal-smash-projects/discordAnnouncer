@@ -17,10 +17,15 @@ export default function Message() {
             <label className='message-label' htmlFor="message">Message</label>
 
             <textarea
+                className="message-input"
                 id="message"
                 value={message}
-                onChange={(event) => setMessage(event.target.value)}
-                rows={6}
+                onChange={(event) => {
+                    setMessage(event.target.value);
+                    event.target.style.height = 'auto';
+                    event.target.style.height = `${event.target.scrollHeight}px`;
+                }}
+                rows={4}
                 placeholder="Write your announcement..."
             />
 

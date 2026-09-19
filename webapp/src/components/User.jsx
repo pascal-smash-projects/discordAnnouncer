@@ -10,7 +10,7 @@ export default function User() {
 
     return (
         <div className="user">
-            <label className='user-label' htmlFor="user">User</label>
+            <label className='user-label' htmlFor="user">Sent From:</label>
             <input
                 type="text"
                 id="user"
