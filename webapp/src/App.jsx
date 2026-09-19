@@ -6,20 +6,23 @@ import Message from './components/Message';
 import SubmitButton from './components/SubmitButton';
 import SubmitFeedback from './components/SubmitFeedback';
 import User from './components/User';
+import Login from './components/login';
 
 function App() {
 
   return (
-    <AnnouncerProvider>
-      <div className='app-container'>
-        <h1>Discord Announcer Bot</h1>
-        <ServerSelector/>
-        <Message />
-        <User />
-        <SubmitButton />
-        <SubmitFeedback />
-      </div>
-    </AnnouncerProvider>
+    <Login>
+      <AnnouncerProvider>
+        <div className='app-container'>
+          <h1>Discord Announcer Bot</h1>
+          <ServerSelector/>
+          <Message />
+          <User />
+          <SubmitButton />
+          <SubmitFeedback />
+        </div>
+      </AnnouncerProvider>
+    </Login>
   )
 }
 
