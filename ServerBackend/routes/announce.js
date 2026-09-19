@@ -1,5 +1,14 @@
 import { Router } from "express";
 import { sendMessage, buildContent, sendMessageWithAttachment } from "../../bot/messaging.mjs";
+import { insertPost } from "../../bot/db.js";
+
+function logPost(...args){
+    try{
+        insertPost(...args);
+    } catch (err) {
+        console.error("Failed to log post:", err);
+    }
+}
 
 const router = Router();
 
@@ -8,7 +17,7 @@ router.post("/", async (req, res) => {
 
     // validate the targets array
     if (!Array.isArray(targets) || targets.length === 0 || !targets.every(target => target.channel && target.message)) {
-        return res.status(400).json({ error: "Invalid Request Payload" });
+        return res.status(400).json({ status: 'error', message: 'Invalid request payload' });
     }
 
     const results = [];
@@ -21,9 +30,11 @@ router.post("/", async (req, res) => {
                 await sendMessage(target.channel, content);
             }
             results.push({ channel: target.channel, status: 'sent' });
+            logPost(target.channel, target.message, target.user || "", target.roles || [], target.attachmentUrl || null, 'sent');
         } catch (err) {
             console.error(`Failed to send to ${target.channel}:`, err);
             results.push({ channel: target.channel, status: 'failed', error: err.message });
+            logPost(target.channel, target.message, target.user || "", target.roles || [], target.attachmentUrl || null, 'failed');
         }
     }
 

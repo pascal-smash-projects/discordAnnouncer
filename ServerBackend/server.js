@@ -1,6 +1,7 @@
 import express from "express";
 import configRoutes from "./routes/config.js";
 import announceRoutes from "./routes/announce.js";
+import getPostsRoutes from "./routes/getPosts.js";
 
 import config from "../bot/config.json" with {type: "json"};
 import { sendMessage, buildContent, sendMessageWithAttachment } from "../bot/messaging.mjs";
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/config", configRoutes);
 app.use("/announce", announceRoutes);
+app.use("/posts", getPostsRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err);
