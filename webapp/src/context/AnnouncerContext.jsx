@@ -21,6 +21,7 @@ export function AnnouncerProvider({ children }) {
     const [servers, setServers] = useState([]);
     const [selections, setSelections] = useState({});
     const [message, setMessage] = useState('');
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         fetch('/api/config')
@@ -45,7 +46,7 @@ export function AnnouncerProvider({ children }) {
             channel: target.channelId,
             roles: target.roleIds,
             message: target.message,
-            user: '',
+            user: target.user,
         }));
 
         try {
@@ -113,6 +114,7 @@ export function AnnouncerProvider({ children }) {
         channelId: selection.channelId,
         roleIds: selection.roleIds,
         message: message.trim(),
+        user: user.trim(),
     }));
 
     const hasMessage = message.trim().length > 0;
@@ -130,6 +132,8 @@ export function AnnouncerProvider({ children }) {
         targets,
         message,
         setMessage,
+        user,
+        setUser,
         MAX_MESSAGE_LENGTH,
         isMessageTooLong,
         isReadyToSend,

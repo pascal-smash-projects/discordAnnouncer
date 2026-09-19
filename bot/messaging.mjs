@@ -77,7 +77,7 @@ export function buildContent(message, user, roles) {
         }
     }
     if (user !== "") {
-        message += '\n\nSent by: ' + user;
+        message += '\n\nSent From: ' + user;
     }
     return message;
 }
