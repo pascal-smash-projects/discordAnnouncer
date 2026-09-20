@@ -6,3 +6,4 @@ dist/
 **/dist/
 bot/posts.db
 *.db
+bot/test1.mjs

@@ -4,14 +4,16 @@ import config from "./config.json" with { type: "json" };
 process.loadEnvFile(new URL("./.env", import.meta.url));
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
-const channelIds = Object.fromEntries(
-    Object.values(config.servers).flatMap((server) => Object.entries(server.channels))
+const validChannelIds = new Set(
+    Object.values(config.servers).flatMap((server) => Object.values(server.channels))
 );
 
 export async function sendMessage(channel, content) {
-    const CHANNEL_ID = channelIds[channel];
+    if (!validChannelIds.has(channel)) {
+        throw new Error(`Unknown channel: ${channel}`);
+    }
 
-    const url = `https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`;
+    const url = `https://discord.com/api/v10/channels/${channel}/messages`;
 
     const headers = {
     "Authorization": `Bot ${DISCORD_BOT_TOKEN}`,
@@ -35,55 +37,18 @@ export async function sendMessage(channel, content) {
     return response.json();
 }
 
-// @pacal this shouldnt be needed anymore as could only handle one file, but ill leave here in case you had plans for it
-// announce.js i changed over to new one
-/*
-export async function sendMessageWithAttachment(channel, content, attachmentUrl) {
-    const CHANNEL_ID = channelIds[channel];
-
-    const url = `https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`;
-
-    const fileResponse = await fetch(attachmentUrl);
-    const fileBlob = await fileResponse.blob();
-    const fileName = new URL(attachmentUrl).pathname.split('/').pop();
-    const form = new FormData();
-    form.append("payload_json", JSON.stringify({
-        content:content,
-        attachments: [{
-            id: 0,
-            filename: fileName
-        }]
-    }));
-    form.append("files[0]", fileBlob, fileName);
-
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bot ${DISCORD_BOT_TOKEN}`
-        },
-        body: form
-    });
-
-    if (!response.ok) {
-        const body = await response.text();
-        throw new Error(`Failed to send message: ${response.status} ${response.statusText} - ${body}`);
-    }
-    return response.json();
-}
-*/
-
 export async function sendMessageWithFiles(channel, content, files = []) {
     // basically just check if no files exist and just fire mssage function othrwise
     if (files.length === 0) {
         return sendMessage(channel, content);
     }
 
-    const CHANNEL_ID = channelIds[channel];
-    if (!CHANNEL_ID) {
+    if (!validChannelIds.has(channel)) {
         throw new Error(`Unknown channel: ${channel}`);
     }
 
-    const url = `https://discord.com/api/v10/channels/${CHANNEL_ID}/messages`;
+    const url = `https://discord.com/api/v10/channels/${channel}/messages`;
+
 
     const form = new FormData();
     form.append("payload_json", JSON.stringify({
