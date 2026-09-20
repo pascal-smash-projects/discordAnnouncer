@@ -3,48 +3,63 @@
     "Smash Ireland (SSBU)": {
       "serverId": "ult",
       "channels": {
-        "ssbu-ireland-announcements": "1550850902884360373",
-        "ssbu-ireland-ulster-events": "1550850967707189389",
-        "ssbu-ireland-munster-events": "1550851011441205278",
-        "ssbu-ireland-connacht-events": "1550851045914058842",
-        "ssbu-ireland-leinster-events": "1550851142827642993",
-        "ssbu-ireland-online-events": "1550851963854258276",
-        "ssbu-tourney-streams": "1550851997232533964",
-        "ssbu-ireland-rankings-results": "1550852033865584740"
+        "announcements": "141678561051279360",
+        "ulster-events": "1275480019094736968",
+        "munster-events": "1275479954846384201",
+        "connacht-events": "1275479932465840128",
+        "leinster-events": "1275489664803012719",
+        "online-events": "1281369106733338624",
+        "tourney-streams": "1201199671125749903",
+        "rankings-results": "1036992460062203946"
       },
       "roles": {
         "everyone": "everyone",
-        "here" : "here",
-        "melt1": "1550871175071142058",
-        "melt102": "1550871286325059584"
+        "here": "here",
+        "Leinster": "187594839129456644",
+        "Connacht": "187594761442426880",
+        "Ulster": "187594561508343808",
+        "Munster": "187595496540340225",
+        "Galway Events": "1034959768256778370",
+        "Belfast Events": "910663049457840178",
+        "Newry Events": "1054176793071980544",
+        "Naas Events": "838088242573869067",
+        "Kerry Events": "694724988112207872",
+        "Cork Events": "671740546372337674",
+        "Dublin Events": "671740301311737866",
+        "Online": "1281755991452553359"
       }
     },
     "SSBM Ireland": {
       "serverId": "melee",
       "channels": {
-        "ssbm-ireland-irish-tourneys": "1550852764614140045"
+        "irish-tourneys": "842510083706585149"
       },
       "roles": {
         "everyone": "everyone",
-        "here" : "here",
-        "melt1": "1550871175071142058",
-        "melt102": "1550871286325059584"
+        "here": "here",
+        "Leinster": "841690802219778068",
+        "Munster": "841690751817089026",
+        "Ulster": "841690885913182288",
+        "Connacht": "841684113906991124",
+        "Brown Thomas": "1484285586151051324",
+        "Runny Weeklies": "1484285514684305548",
+        "XGC 2.0": "1484285722818252891",
+        "Give'er Plenty": "1484285643927584899",
+        "Fry Up": "1484684396005949560"
       }
     },
     "The North Awakens": {
       "serverId": "tna",
       "channels": {
-        "tna-announcements": "1550852864933629983",
-        "tna-monthly-schedule": "1550852889138700431",
-        "tna-upcoming-tournaments": "1550852919497064518",
-        "tna-tournament-streams": "1550852943996264458",
-        "tna-results": "1550852964216995921"
+        "announcements": "836260059495399494",
+        "monthly-schedule": "1376674917180899470",
+        "upcoming-tournaments": "836265362298372126",
+        "tournament-streams": "1203043296411127849",
+        "results": "1149482873083134103"
       },
       "roles": {
         "everyone": "everyone",
-        "here" : "here",
-        "melt1": "1550871175071142058",
-        "melt102": "1550871286325059584"
+        "here": "here"
       }
     }
   }
