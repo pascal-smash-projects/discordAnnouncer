@@ -15,13 +15,22 @@ process.loadEnvFile(new URL("./.env", import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(cookieSession({ name: "session", keys: [process.env.SESSION_KEYS] }));
+app.set("trust proxy", 1);
 
-app.use("/config", configRoutes);
-app.use("/announce", announceRoutes);
-app.use("/posts", getPostsRoutes);
-app.use("/attachments", attachmentRoutes);
+app.use(express.json());
+app.use(cookieSession({
+    name: "session",
+    keys: [process.env.SESSION_KEYS],
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+}));
+
+app.use("/config", requireAuth, configRoutes);
+app.use("/announce", requireAuth, announceRoutes);
+app.use("/posts", requireAuth, getPostsRoutes);
+app.use("/attachments", requireAuth, attachmentRoutes);
 app.use("/auth", authRoutes);
 
 app.use((err, req, res, next) => {
