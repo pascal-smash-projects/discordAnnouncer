@@ -1,0 +1,115 @@
+.attachments {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.attachments-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.attachments-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #b5bac1;
+}
+
+.attachments-count {
+  font-size: 12px;
+  color: #b5bac1;
+}
+
+/* Discord's grey secondary button */
+.attachments-add {
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #4e5058;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.17s ease;
+}
+
+.attachments-add:hover:not(:disabled) {
+  background-color: #6d6f78;
+}
+
+.attachments-add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.attachments-error {
+  font-size: 13px;
+  color: #f23f42;
+}
+
+.attachments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  list-style: none;
+}
+
+.attachment-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: #232428;
+  border-radius: 4px;
+}
+
+.attachment-thumb {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  background: #1e1f22;
+  border-radius: 4px;
+}
+
+.attachment-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.attachment-name {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-size {
+  font-size: 12px;
+  color: #b5bac1;
+}
+
+.attachment-remove {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  font: inherit;
+  color: #b5bac1;
+  background: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.attachment-remove:hover {
+  color: #f23f42;
+  background: #3b2426;
+}

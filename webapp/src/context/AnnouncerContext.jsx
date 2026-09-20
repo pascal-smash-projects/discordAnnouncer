@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const MAX_MESSAGE_LENGTH = 1900; //discords is 2000 but this is to allow roles
+const MAX_FILES = 10;
+const MAX_FILE_BYTES = 8 * 1024 * 1024;
+const ALLOWED_FILE_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/webp'];
 
 const AnnouncerContext = createContext(null);
 
@@ -22,6 +25,8 @@ export function AnnouncerProvider({ children }) {
     const [selections, setSelections] = useState({});
     const [message, setMessage] = useState('');
     const [user, setUser] = useState('');
+    const [files, setFiles] = useState([]);  // [{ id, file }]
+    const [fileErrors, setFileErrors] = useState([]);
 
     useEffect(() => {
         fetch('/api/config')
@@ -50,10 +55,13 @@ export function AnnouncerProvider({ children }) {
         }));
 
         try {
+            const form = new FormData();
+            form.append('targets', JSON.stringify(payload));
+            files.forEach(({ file }) => form.append('files', file));
+
             const res = await fetch('/api/announce', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
+                body: form,
             });
 
             let data = null;
@@ -126,6 +134,33 @@ export function AnnouncerProvider({ children }) {
         hasMessage &&
         !isMessageTooLong;
 
+    function addFiles(fileList) {
+        const accepted = [];
+        const problems = [];
+
+        for (const file of Array.from(fileList)) {
+            if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+                problems.push(`${file.name} isn't a supported image type`);
+            } else if (file.size > MAX_FILE_BYTES) {
+                problems.push(`${file.name} is larger than ${MAX_FILE_BYTES / 1024 / 1024} MB`);
+            } else {
+                accepted.push({ id: crypto.randomUUID(), file });
+            }
+        }
+
+        if (files.length + accepted.length > MAX_FILES) {
+            problems.push(`You can attach up to ${MAX_FILES} images`);
+        }
+
+        setFiles((prev) => [...prev, ...accepted].slice(0, MAX_FILES));
+        setFileErrors(problems);
+    }
+
+    function removeFile(id) {
+        setFiles((prev) => prev.filter((f) => f.id !== id));
+        setFileErrors([]);
+    }
+
     const value = {
         servers,
         selections,
@@ -146,6 +181,12 @@ export function AnnouncerProvider({ children }) {
         submitError,
         submit,
         dismissResult,
+        files,
+        addFiles,
+        removeFile,
+        fileErrors,
+        MAX_FILES,
+        ALLOWED_FILE_TYPES
     };
 
     return (
