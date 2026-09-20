@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "express": "^5.2.1",
-    "multer": "^2.4.0"
+    "multer": "^2.4.0",
+    "cookie-session": "^2.1.1"
   }
 }
