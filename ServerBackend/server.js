@@ -8,7 +8,7 @@ import authRoutes from "./routes/auth.js";
 import { requireAuth } from "./middleware/requireAuth.js";
 
 import config from "../bot/config.json" with {type: "json"};
-import { sendMessage, buildContent, sendMessageWithAttachment } from "../bot/messaging.mjs";
+import { sendMessage, buildContent } from "../bot/messaging.mjs";
 
 process.loadEnvFile(new URL("./.env", import.meta.url));
 

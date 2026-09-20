@@ -35,6 +35,9 @@ export async function sendMessage(channel, content) {
     return response.json();
 }
 
+// @pacal this shouldnt be needed anymore as could only handle one file, but ill leave here in case you had plans for it
+// announce.js i changed over to new one
+/*
 export async function sendMessageWithAttachment(channel, content, attachmentUrl) {
     const CHANNEL_ID = channelIds[channel];
 
@@ -67,9 +70,10 @@ export async function sendMessageWithAttachment(channel, content, attachmentUrl)
     }
     return response.json();
 }
+*/
 
 export async function sendMessageWithFiles(channel, content, files = []) {
-    // No files: the plain JSON path is enough
+    // basically just check if no files exist and just fire mssage function othrwise
     if (files.length === 0) {
         return sendMessage(channel, content);
     }
@@ -109,6 +113,8 @@ export function buildContent(message, user, roles) {
     for (const role of roles) {
         if (role === "everyone") {
             message += `\n@everyone`;
+        } else if (role === "here") {
+            message += `\n@here`;
         } else {
             message += `\n<@&${role}>`;
         }
