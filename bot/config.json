@@ -61,6 +61,26 @@
         "everyone": "everyone",
         "here": "here"
       }
+    },
+    "Smash Munster": {
+      "serverId": "munster",
+      "channels": {
+        "announcements": "889294919217332264",
+        "streams": "1381654547126288475",
+        "rankings-results": "1381661571591180368"
+      },
+      "roles": {
+        "everyone": "everyone",
+        "here": "here",
+        "Cork": "889305925356236811",
+        "Clare": "889309336009056256",
+        "Kerry": "889305851398066186",
+        "Limerick": "889309414476107796",
+        "Tipperary": "889305998563631136",
+        "Waterford": "889306067786432523",
+        "Not Munster": "889309554507124787",
+        "Not Irish": "889309721398497280"
+      }
     }
   }
 }
