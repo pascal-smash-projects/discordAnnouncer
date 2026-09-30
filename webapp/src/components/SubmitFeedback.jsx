@@ -7,7 +7,7 @@ const SUMMARY = {
 };
 
 export default function SubmitFeedback() {
-    const { submitStatus, results, submitError, dismissResult } = useAnnouncer();
+    const { submitStatus, namedResults, submitError, dismissResult } = useAnnouncer();
 
     if (submitStatus === 'idle' || submitStatus === 'sending') return null;
 
@@ -17,11 +17,11 @@ export default function SubmitFeedback() {
         <div className={isSuccess ? 'feedback success' : 'feedback error'} role={isSuccess ? 'status' : 'alert'}>
             <strong>{submitError || SUMMARY[submitStatus]}</strong>
 
-            {results.length > 0 && (
+            {namedResults.length > 0 && (
                 <ul>
-                    {results.map((r) => (
-                        <li key={`${r.server}-${r.channel}`}>
-                            {r.status === 'sent' ? '✓' : '✗'} {r.server} #{r.channel}
+                    {namedResults.map((r) => (
+                        <li key={`${r.server}-${r.channel}`}> {/*old keys (id) dont change unless config changes*/}
+                            {r.status === 'sent' ? '✓' : '✗'} {r.serverName} #{r.channelName}
                             {r.status === 'failed' && `: ${r.error}`}
                         </li>
                     ))}
