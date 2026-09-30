@@ -134,6 +134,17 @@ export function AnnouncerProvider({ children }) {
         hasMessage &&
         !isMessageTooLong;
 
+    // added so channel names can be included in error over id
+    const namedResults = results.map((result) => {
+        const server = servers.find((s) => s.id === result.server);
+        const channel = server?.channels.find((c) => c.id === result.channel);
+        return {
+            ...result,
+            serverName: server?.name ?? result.server,
+            channelName: channel?.name ?? result.channel,
+        };
+    });
+
     function addFiles(fileList) {
         const accepted = [];
         const problems = [];
@@ -178,6 +189,7 @@ export function AnnouncerProvider({ children }) {
         configError,
         submitStatus,
         results,
+        namedResults,
         submitError,
         submit,
         dismissResult,
