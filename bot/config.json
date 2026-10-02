@@ -32,7 +32,8 @@
     "SSBM Ireland": {
       "serverId": "melee",
       "channels": {
-        "irish-tourneys": "842510083706585149"
+        "irish-tourneys": "842510083706585149",
+        "announcements": "1429946704349626451"
       },
       "roles": {
         "everyone": "everyone",
